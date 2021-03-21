@@ -2,7 +2,7 @@ package bin;
 
 import java.util.Arrays;
 import java.util.Date;
-import java.text.SimpleDateFormat;
+
 
 
 /*
@@ -10,7 +10,6 @@ import java.text.SimpleDateFormat;
     Constructori : de initializare si de copiere
     Gettere si settere pentru toti membrii clasei
     Validari pentru toti membri clasei
-    Metode pentru deposit si withdraw din cont
 */
 
 public class Account {
@@ -18,27 +17,31 @@ public class Account {
     private String IBAN; // IBAN-ul contului
     private String currency; // Valuta contului
     private double balance; // Suma curenta din cont
-    private Date createDate; // Data ultimei modificari aduse contului
+    private final Date createDate; // Data ultimei modificari aduse contului
 
 
     public Account(String _IBAN, String _currency){
         if(checkIBAN(_IBAN))
-            this.IBAN = _IBAN;
+            setIBAN(_IBAN);
         if(checkCurrency(_currency))
-            this.currency = _currency;
+            setCurrency(_currency);
         setBalance();
-        SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
-        Date date = new Date(System.currentTimeMillis());
-        this.createDate = date;
+        this.createDate = new Date(System.currentTimeMillis());
+    }
+
+    public Account(){
+        this.IBAN = "XX00XX12345678912345";
+        this.currency = "RON";
+        this.balance = 0;
+        this.createDate = new Date(System.currentTimeMillis());
     }
 
     public Account(Account acc){
         this.IBAN = acc.IBAN;
         this.currency = acc.currency;
         this.balance = acc.balance;
-        SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z"); // Data contului este data la care s-a efectuat ultima modificare,
-        Date date = new Date(System.currentTimeMillis()); // altfel, data nu as mai fi modificat-o
-        this.createDate = date;
+        // Data contului este data la care s-a efectuat ultima modificare,
+        this.createDate = new Date(System.currentTimeMillis());
     }
 
     public void setIBAN(String _IBAN){
@@ -50,12 +53,12 @@ public class Account {
         return this.IBAN;
     }
 
-    //checks if given iban is valid
+    // verifica daca IBAN dat este valid
     private boolean checkIBAN(String _IBAN){
         if(_IBAN.length() != 22)
             return false;
 
-        String s = _IBAN;
+        String s = "";
         String l = Arrays.toString(s.toCharArray());
         for(int i = 4; i < _IBAN.length(); ++i){
             s = s + l.charAt(i);
@@ -64,13 +67,12 @@ public class Account {
             s = s + l.charAt(i);
         }
 
-
-        return true;
+        return checksum(s);
     }
 
-    //converts iban characters for the verifying algorithm
+    // functie de convert pentru validitatea IBAN
     private long convertToInteger(String l, int start, int end){
-        long sum = 0, p = 1;
+        long sum = 0;
         for(int i = start; i < end; ++i) {
             char c = l.charAt(i);
             if(c >= 'a' && c <= 'z'){
@@ -84,7 +86,7 @@ public class Account {
         return sum;
     }
 
-    //modulo operation on iban converted to long
+    // operatie modulo pe IBAN convertit
     private boolean checksum(String _IBAN){
 
         int i = 0;
@@ -114,11 +116,16 @@ public class Account {
     }
 
     private boolean checkCurrency(String _currency){
-        return (_currency == "RON" || _currency =="EUR" || _currency == "USD" || _currency == "GBP");
+        return (_currency.equals("RON") || _currency.equals("EUR") || _currency.equals("USD") || _currency.equals("GBP"));
     }
 
     private void setBalance(){
         this.balance = 0;
+    }
+
+    public void setBalance(double sum){
+        if(sum > 0)
+            balance += sum;
     }
 
     public double getBalance(){
@@ -129,18 +136,11 @@ public class Account {
         return this.createDate;
     }
 
-    public void depositSum(double sum){
-        if(sum > 0) {
-            this.balance += sum;
-            System.out.println("You have deposited " + toString(sum) + currency);
-        }
-    };
-
-    public void withdrawSum(double sum){
-        if(balance - sum > 0) {
-            this.balance -= sum;
-            System.out.println("You have withdrawn " + toString(sum) + currency);
-        }
-    };
-
+    // afiseaza informatii despre un cont
+    public void AccountInfo(){
+        System.out.println("IBAN: " + this.IBAN);
+        System.out.println("Account currency: " + this.currency);
+        System.out.println("Balance: " + this.balance);
+        System.out.println("Created: " + this.createDate);
+    }
 }
