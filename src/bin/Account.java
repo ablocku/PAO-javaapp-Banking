@@ -21,10 +21,9 @@ public class Account {
 
 
     public Account(String _IBAN, String _currency){
-        if(checkIBAN(_IBAN))
-            setIBAN(_IBAN);
-        if(checkCurrency(_currency))
-            setCurrency(_currency);
+
+        setIBAN(_IBAN);
+        setCurrency(_currency);
         setBalance();
         this.createDate = new Date(System.currentTimeMillis());
     }
@@ -47,6 +46,8 @@ public class Account {
     public void setIBAN(String _IBAN){
         if(checkIBAN(_IBAN))
             this.IBAN = _IBAN;
+        else
+            this.IBAN = "XX00XXXX00000000000000";
     }
 
     public String getIBAN(){
@@ -55,56 +56,13 @@ public class Account {
 
     // verifica daca IBAN dat este valid
     private boolean checkIBAN(String _IBAN){
-        if(_IBAN.length() != 22)
+        if(_IBAN.length() != 22 )
             return false;
-
-        String s = "";
-        String l = Arrays.toString(s.toCharArray());
-        for(int i = 4; i < _IBAN.length(); ++i){
-            s = s + l.charAt(i);
-        }
-        for(int i = 0; i < 4; ++i){
-            s = s + l.charAt(i);
-        }
-
-        return checksum(s);
+        if(_IBAN == "XX00XXXX00000000000000")
+            return false;
+        return true;
     }
 
-    // functie de convert pentru validitatea IBAN
-    private long convertToInteger(String l, int start, int end){
-        long sum = 0;
-        for(int i = start; i < end; ++i) {
-            char c = l.charAt(i);
-            if(c >= 'a' && c <= 'z'){
-                sum = sum*10 + (long) (c-'a'+1);
-            }
-            else if(c >= 'A' && c <= 'Z'){
-                sum += sum*10 + (long) (c-'A'+1);
-            }
-            else sum += sum*10 + (long)(c-'0');
-        }
-        return sum;
-    }
-
-    // operatie modulo pe IBAN convertit
-    private boolean checksum(String _IBAN){
-
-        int i = 0;
-        String c = _IBAN;
-        long x = 0;
-        while(c.length() >= 7 ){
-            x = convertToInteger(c,i,i+9);
-            x = x %97;
-            String nextTwo = String.valueOf(x);
-            c = (new StringBuilder()).append(nextTwo).append(_IBAN,i+9,i+7).toString();
-            i += 7;
-        }
-        if(c.length() >= 1) {
-            x = convertToInteger(c, i, c.length() - 1);
-            x = x % 97;
-        }
-        return x == 1;
-    }
 
     public void setCurrency(String _currency){
         if(checkCurrency(_currency))
@@ -142,5 +100,13 @@ public class Account {
         System.out.println("Account currency: " + this.currency);
         System.out.println("Balance: " + this.balance);
         System.out.println("Created: " + this.createDate);
+        if(checkIBAN(this.IBAN))
+            System.out.println("IBAN VALIDITY: " + "verified" );
+        else
+            System.out.println("IBAN not valid!");
+        if(checkCurrency(this.currency))
+            System.out.println("Currency VALIDITY: " + "verified" );
+        else
+            System.out.println("Currency not valid!");
     }
 }
