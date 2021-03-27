@@ -1,6 +1,6 @@
 package bin;
 
-abstract public class MasterCard extends Card{
+public class MasterCard extends Card{
 
     @Override
     public void CardInfo() {

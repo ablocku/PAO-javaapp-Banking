@@ -2,128 +2,16 @@ package bin;
 
 import java.util.*;
 
+/*
+    Clasa creata pentru gestionarea unui card
+*/
 
 public class Card{
 
     private String cardNumber;
     private Date expirationDate;
     private int CVV;
-    private List<Account> accounts = new List<Account>() {
-        @Override
-        public int size() {
-            return 0;
-        }
-
-        @Override
-        public boolean isEmpty() {
-            return false;
-        }
-
-        @Override
-        public boolean contains(Object o) {
-            return false;
-        }
-
-        @Override
-        public Iterator<Account> iterator() {
-            return null;
-        }
-
-        @Override
-        public Object[] toArray() {
-            return new Object[0];
-        }
-
-        @Override
-        public <T> T[] toArray(T[] a) {
-            return null;
-        }
-
-        @Override
-        public boolean add(Account account) {
-            return false;
-        }
-
-        @Override
-        public boolean remove(Object o) {
-            return false;
-        }
-
-        @Override
-        public boolean containsAll(Collection<?> c) {
-            return false;
-        }
-
-        @Override
-        public boolean addAll(Collection<? extends Account> c) {
-            return false;
-        }
-
-        @Override
-        public boolean addAll(int index, Collection<? extends Account> c) {
-            return false;
-        }
-
-        @Override
-        public boolean removeAll(Collection<?> c) {
-            return false;
-        }
-
-        @Override
-        public boolean retainAll(Collection<?> c) {
-            return false;
-        }
-
-        @Override
-        public void clear() {
-
-        }
-
-        @Override
-        public Account get(int index) {
-            return null;
-        }
-
-        @Override
-        public Account set(int index, Account element) {
-            return null;
-        }
-
-        @Override
-        public void add(int index, Account element) {
-
-        }
-
-        @Override
-        public Account remove(int index) {
-            return null;
-        }
-
-        @Override
-        public int indexOf(Object o) {
-            return 0;
-        }
-
-        @Override
-        public int lastIndexOf(Object o) {
-            return 0;
-        }
-
-        @Override
-        public ListIterator<Account> listIterator() {
-            return null;
-        }
-
-        @Override
-        public ListIterator<Account> listIterator(int index) {
-            return null;
-        }
-
-        @Override
-        public List<Account> subList(int fromIndex, int toIndex) {
-            return null;
-        }
-    };
+    private List<Account> accounts = new ArrayList<>();
 
     public Card(String _cardNumber, int _CVV){
         if(cardNumber.length() == 16)
@@ -174,6 +62,13 @@ public class Card{
             System.out.println("You can hold a maximum of 10 accounts on one card!");
     }
 
+    public void printAccounts(){
+        List<Account> l = this.getAccounts();
+        for(int i = 0 ; i < l.size(); i++)
+            l.get(i).AccountInfo();
+
+    }
+
     public void closeAccount(Account account){
         for(Account a : accounts){
             if(a == account) {
@@ -195,12 +90,5 @@ public class Card{
         System.out.println(this.expirationDate);
     }
 
-    public void depositSum(double sum){
-        if(sum > 0) {
-            Account a = accounts.get(0);
-            a.setBalance(sum);
-            accounts.remove(0);
-            accounts.add(0, a);
-        }
-    }
+
 }

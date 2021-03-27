@@ -81,17 +81,27 @@ public class Account {
         this.balance = 0;
     }
 
-    public void setBalance(double sum){
-        if(sum > 0)
-            balance += sum;
-    }
 
     public double getBalance(){
         return this.balance;
     }
 
+    public void setBalance(double amount){ this.balance = amount;}
+
     public Date getCreateDate(){
         return this.createDate;
+    }
+
+    public boolean isValid(){
+        if(this.IBAN == "XX00XXXX00000000000000" || this.IBAN.length() != 22)
+            return false;
+        if(this.currency.equals("RON") || this.currency.equals("EUR") ||  this.currency.equals("USD") ||  this.currency.equals("GBP"))
+            ;
+        else
+            return false;
+        if(this.balance < 0 )
+            return false;
+        return true;
     }
 
     // afiseaza informatii despre un cont
