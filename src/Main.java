@@ -2,8 +2,8 @@ import bin.*;
 
 import java.util.List;
 
-//de adaugat get in clasa card pt conturi si afisare
-// de verificat accountcontroller si de facut pocket
+// de adaugat employees si exemple pentru clasele pocket,person,major,client,bank,employees
+// de adaugat o sortare pe undeva
 
 public class Main {
     public static void main(String[] args) {
@@ -15,7 +15,7 @@ public class Main {
         //account.AccountInfo();
         //account.deposit(12);
 
-/*
+
         //metode card
         Card card = new Card();
         card.setCardNumber("1234123412341234");
@@ -23,13 +23,21 @@ public class Main {
         card.addAccount(account);
         //card.CardInfo();
         List<Account> l = card.getAccounts();
-        /*
+
         account.AccountInfo();
         System.out.println(card.getAccounts().isEmpty());
         System.out.println(card.getAccounts().contains(account));
         card.printAccounts();
-        metode subclase mastercard si visa
-*/
+        card.closeAccount(account);
+        System.out.println("dupa remove");
+        card.printAccounts();
+        System.out.println("incercam sa adaugam de 2 ori");
+        card.addAccount(account);
+        card.addAccount(account);
+        card.printAccounts();
+        //
+        // metode subclase mastercard si visa
+
 
 /*
         Card card1 = new MasterCard();
@@ -48,6 +56,8 @@ public class Main {
         card2.setCVV(222); // ultimul CVV e 222
         card2.CardInfo();
 */
+
+
 
     }
 }

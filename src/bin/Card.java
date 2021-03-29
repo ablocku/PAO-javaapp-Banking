@@ -57,7 +57,10 @@ public class Card{
 
     public void addAccount(Account account){
         if(accounts.size() + 1 < 10 && account != null)
-            accounts.add(account);
+            if(!accounts.contains(account))
+                accounts.add(account);
+            else
+                System.out.println("This account has been already added");
         else
             System.out.println("You can hold a maximum of 10 accounts on one card!");
     }
@@ -90,5 +93,10 @@ public class Card{
         System.out.println(this.expirationDate);
     }
 
-
+    public boolean isValid(){
+        Date d = new Date(System.currentTimeMillis());
+        return ((this.cardNumber != "0000000000000000" && this.cardNumber.length() == 16)
+                && (this.CVV >= 100 && this.CVV <1000)
+                && (!this.expirationDate.after(d)));
+    }
 }

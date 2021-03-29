@@ -119,4 +119,22 @@ public class Account {
         else
             System.out.println("Currency not valid!");
     }
+
+    public void deposit(double sum){
+        if(sum > 0) {
+            double currBalance = this.getBalance();
+            this.setBalance(currBalance + sum);
+        }
+        else
+            System.out.println("Please select a valid sum!");
+    }
+
+    public void withdraw(double sum){
+        double currBalance = this.getBalance();
+        if(currBalance - sum >= 0){
+            currBalance -= sum;
+        }
+        else
+            System.out.println("Insufficient funds!");
+    }
 }

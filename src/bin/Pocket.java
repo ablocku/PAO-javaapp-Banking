@@ -6,17 +6,36 @@ package bin;
  */
 
 public class Pocket extends Account{
-    private int maxAmount = 0;
+    private double maxAmount = 0;
+    private Account linkedAccount;
 
     public Pocket() {
         System.out.println("Pocket created, set the maximum amount for a deposit");
+        linkedAccount = new Account();
     };
 
-    public int getMaxAmount() {
+    public Pocket(Pocket p){
+        this.maxAmount = p.maxAmount;
+        this.linkedAccount = p.linkedAccount;
+    }
+
+    public double getMaxAmount() {
         return maxAmount;
     }
 
     public void setMaxAmount(int maxAmount) {
         this.maxAmount = maxAmount;
+    }
+
+    public void setLinkedAccount(Account a){ this.linkedAccount = new Account(a);}
+
+    public Account getLinkedAccount(){  return this.linkedAccount;}
+
+    public void erasePocket(){
+        if(linkedAccount.isValid()){
+            linkedAccount.deposit(this.getBalance());
+            this.linkedAccount = null;
+            this.maxAmount = 0;
+        }
     }
 }
