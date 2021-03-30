@@ -56,11 +56,11 @@ public class Account {
 
     // verifica daca IBAN dat este valid
     private boolean checkIBAN(String _IBAN){
-        if(_IBAN.length() != 22 )
+        if(_IBAN.length() != 22 ){
+            System.out.println("IBAN length should be 22 characters");
             return false;
-        if(_IBAN == "XX00XXXX00000000000000")
-            return false;
-        return true;
+        }
+        return _IBAN != "XX00XXXX00000000000000";
     }
 
 
@@ -74,7 +74,13 @@ public class Account {
     }
 
     private boolean checkCurrency(String _currency){
-        return (_currency.equals("RON") || _currency.equals("EUR") || _currency.equals("USD") || _currency.equals("GBP"));
+        if(_currency.equals("RON") || _currency.equals("EUR") || _currency.equals("USD") || _currency.equals("GBP")){
+            return true;
+        }
+        else {
+            System.out.println("Set currency as RON/EUR/USD or GBP!");
+            return false;
+        }
     }
 
     private void setBalance(){

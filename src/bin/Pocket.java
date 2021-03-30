@@ -24,7 +24,8 @@ public class Pocket extends Account{
     }
 
     public void setMaxAmount(int maxAmount) {
-        this.maxAmount = maxAmount;
+        if(maxamountisValid(maxAmount))
+            this.maxAmount = maxAmount;
     }
 
     public void setLinkedAccount(Account a){ this.linkedAccount = new Account(a);}
@@ -37,5 +38,19 @@ public class Pocket extends Account{
             this.linkedAccount = null;
             this.maxAmount = 0;
         }
+    }
+
+    @Override
+    public void deposit(double sum){
+        if(sum < maxAmount)
+            super.deposit(sum);
+    }
+
+    public boolean maxamountisValid(int amount){
+        if(amount <= 0){
+            System.out.println("Set a larger amount");
+            return false;
+        }
+        return true;
     }
 }

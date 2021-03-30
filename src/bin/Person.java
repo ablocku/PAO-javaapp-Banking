@@ -17,17 +17,24 @@ abstract public class Person {
     public Person(int _age, String _firstName, String _lastName, char _gender){
         if(_age > 0)
             this.age = _age;
-        if(_firstName != "")
+        if(!_firstName.equals(""))
             this.firstName = _firstName;
-        if(_lastName != "")
+        if(!_lastName.equals(""))
             this.lastName = _lastName;
         if(_gender == 'M' || _gender == 'F')
             this.gender = _gender;
         this.name = this.firstName + this.lastName;
     }
 
+    public Person(Person person){
+        setAge(person.age);
+        setFirstName(person.firstName);
+        setLastName(person.lastName);
+        setGender(person.gender);
+    }
+
     public void setAge(int age) {
-        if(age > 0)
+        if(ageisValid(age))
             this.age = age;
     }
 
@@ -36,7 +43,7 @@ abstract public class Person {
     }
 
     public void setFirstName(String firstName) {
-        if(firstName != "")
+        if(firstnameisValid(firstName))
             this.firstName = firstName;
     }
 
@@ -45,8 +52,10 @@ abstract public class Person {
     }
 
     public void setLastName(String lastName) {
-        if(lastName != "")
+        if(firstnameisValid(lastName)) {
             this.lastName = lastName;
+            this.name = this.firstName + " " + this.lastName;
+        }
     }
 
     public String getLastName() {
@@ -54,7 +63,7 @@ abstract public class Person {
     }
 
     public void setGender(char gender) {
-        if(gender == 'M' || gender == 'F')
+        if(genderisValid(gender))
             this.gender = gender;
     }
 
@@ -62,6 +71,32 @@ abstract public class Person {
         return gender;
     }
 
+    public String getName() {
+        return name;
+    }
 
+    public boolean ageisValid(int age){
+        if(age < 0) {
+            System.out.println("Age cannot be a negative value!");
+            return false;
+        }
+        return true;
+    }
+
+    public boolean firstnameisValid(String name){
+        if(name.equals("")){
+            System.out.println("Name cannot be an empty string!");
+            return false;
+        }
+        return true;
+    }
+
+    public boolean genderisValid(char c){
+        if(c != 'M' && c != 'F'){
+            System.out.println("Please select M or F for the gender!");
+            return false;
+        }
+        return true;
+    }
 
 }

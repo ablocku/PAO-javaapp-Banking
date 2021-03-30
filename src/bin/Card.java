@@ -14,10 +14,8 @@ public class Card{
     private List<Account> accounts = new ArrayList<>();
 
     public Card(String _cardNumber, int _CVV){
-        if(cardNumber.length() == 16)
-            this.cardNumber = _cardNumber;
-        if(_CVV >= 100 && _CVV <1000)
-            this.CVV = _CVV;
+        setCardNumber(_cardNumber);
+        setCVV(_CVV);
         Account acc = new Account();
         accounts.add(acc);
         this.expirationDate = new Date(System.currentTimeMillis());
@@ -36,7 +34,8 @@ public class Card{
     }
 
     public void setCardNumber(String cardNumber) {
-        this.cardNumber = cardNumber;
+        if(cardnumberisValid(cardNumber))
+            this.cardNumber = cardNumber;
     }
 
     public int getCVV() {
@@ -44,7 +43,8 @@ public class Card{
     }
 
     public void setCVV(int CVV) {
-        this.CVV = CVV;
+        if(cvvisValid(CVV))
+            this.CVV = CVV;
     }
 
     public Date getExpirationDate() {
@@ -83,20 +83,49 @@ public class Card{
 
     public void CardInfo(){
         if(cardNumber.length() == 16 && cardNumber != "0000000000000000")
-            System.out.println(this.cardNumber);
+            System.out.println("Card number: " + this.cardNumber);
         else
             System.out.println("Card number was not properly set!");
         if(CVV >= 100 && CVV <1000)
-            System.out.println(this.CVV);
+            System.out.println("CVV: " + this.CVV);
         else
             System.out.println("CVV was not properly set!");
-        System.out.println(this.expirationDate);
+        System.out.println("Expiration Date: " + this.expirationDate);
+        System.out.println();
     }
 
     public boolean isValid(){
         Date d = new Date(System.currentTimeMillis());
-        return ((this.cardNumber != "0000000000000000" && this.cardNumber.length() == 16)
-                && (this.CVV >= 100 && this.CVV <1000)
-                && (!this.expirationDate.after(d)));
+        return ((!this.cardNumber.equals("0000000000000000") && this.cardNumber.length() == 16)
+                && (this.CVV >= 100 && this.CVV <1000));
+                /*&& (!this.expirationDate.after(d)));*/
     }
+
+    public boolean isdigit(char c){
+        return c>='0' && c<='9';
+    }
+
+    public boolean cardnumberisValid(String cardNumber){
+        if(cardNumber.length() != 16){
+            System.out.println("Card number should be 16 characters long");
+            return false;
+        }
+        for(int i = 0 ; i < cardNumber.length(); i++)
+            if(!isdigit(cardNumber.charAt(i))){
+                System.out.println("Only digits are allowed");
+                return false;
+            }
+        return true;
+    }
+
+    public boolean cvvisValid(int CVV){
+        if(CVV >= 100 && CVV <= 999)
+            return true;
+        else{
+            System.out.println("Please enter a 3-digit number!");
+            return false;
+        }
+
+    }
+
 }
