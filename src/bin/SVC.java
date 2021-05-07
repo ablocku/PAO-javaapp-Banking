@@ -16,7 +16,7 @@ public class SVC {
     static List<Visa> visaList = new ArrayList<>();
     static List<Major> majorList = new ArrayList<>();
 
-    public static void listBanks(){
+    public void listBanks(){
         int i = 0;
         if(bankList.isEmpty())
             System.out.println("No banks");
@@ -29,7 +29,7 @@ public class SVC {
             }
     }
 
-    public static void listClients(){
+    public void listClients(){
         if(clientList.isEmpty())
             System.out.println("No clients");
         else
@@ -39,7 +39,7 @@ public class SVC {
             }
     }
 
-    public static void listPockets(){
+    public void listPockets(){
         if(pocketList.isEmpty())
             System.out.println("No pockets");
         else
@@ -49,7 +49,7 @@ public class SVC {
             }
     }
 
-    public static void listAccounts(){
+    public void listAccounts(){
         if(accountList.isEmpty())
             System.out.println("No accounts");
         else
@@ -59,7 +59,7 @@ public class SVC {
             }
     }
 
-    public static void listCards(){
+    public void listCards(){
         if(cardList.isEmpty())
             System.out.println("No cards");
         else
@@ -69,7 +69,7 @@ public class SVC {
             }
     }
 
-    public static void listMasterCards(){
+    public void listMasterCards(){
         if(masterCardList.isEmpty())
             System.out.println("No MasterCards");
         else
@@ -80,7 +80,7 @@ public class SVC {
             }
     }
 
-    public static void listVisas(){
+    public void listVisas(){
         if(visaList.isEmpty())
             System.out.println("No Visa cards");
         else
@@ -90,7 +90,7 @@ public class SVC {
             }
     }
 
-    public static void listMajors(){
+    public void listMajors(){
         if(majorList.isEmpty())
             System.out.println("No majors");
         else
@@ -100,7 +100,7 @@ public class SVC {
             }
     }
 
-    public static void addBank(){
+    public void addBank(){
         Scanner scanner = new Scanner(System.in).useDelimiter("\n");
         Bank b = new Bank();
         System.out.println("Enter bank name: ");
@@ -114,7 +114,7 @@ public class SVC {
         bankList.sort(Comparator.comparing(Bank::getName));
     }
 
-    public static void addMajor(){
+    public void addMajor(){
         Scanner scanner = new Scanner(System.in).useDelimiter("\n");
 
         Major m = new Major();
@@ -136,7 +136,7 @@ public class SVC {
         majorList.add(m);
     }
 
-    public static void addCard(){
+    public void addCard(){
         Scanner scanner = new Scanner(System.in).useDelimiter("\n");
 
         Card c = new Card();
@@ -161,7 +161,7 @@ public class SVC {
        }
     }
 
-    public static void addVisa(){
+    public void addVisa(){
         Scanner scanner = new Scanner(System.in).useDelimiter("\n");
 
         Visa c = new Visa();
@@ -181,7 +181,7 @@ public class SVC {
         }
     }
 
-    public static void addMasterCard(){
+    public void addMasterCard(){
         Scanner scanner = new Scanner(System.in).useDelimiter("\n");
 
         MasterCard c = new MasterCard();
@@ -201,7 +201,7 @@ public class SVC {
         }
     }
 
-    public static void addAccount(){
+    public void addAccount(){
         Scanner scanner = new Scanner(System.in).useDelimiter("\n");
         Account a = new Account();
 
@@ -213,6 +213,8 @@ public class SVC {
         String curr = scanner.next();
         a.setCurrency(curr);
 
+        System.out.println(i);
+        System.out.println(curr);
 
         if(a.isValid()){
             System.out.println("Account succesfully created!");
@@ -226,7 +228,7 @@ public class SVC {
 
     }
 
-    public static void addClient(){
+    public void addClient(){
         Scanner scanner = new Scanner(System.in).useDelimiter("\n");
 
         System.out.println("Enter client age: ");
@@ -296,7 +298,7 @@ public class SVC {
 
     }
 
-    public static void addPocket(){
+    public void addPocket(){
         Scanner scanner = new Scanner(System.in).useDelimiter("\n");
 
         System.out.println("To add a pocket, you must first add an account.");

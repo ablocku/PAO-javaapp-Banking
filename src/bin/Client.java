@@ -56,4 +56,22 @@ public class Client extends Major {
             b.getClientList().add(this);
         }
     }
+
+    public String convert2CSV(){
+        StringBuilder s = new StringBuilder("Client: ");
+        s.append(getAge()).append(";");
+        s.append(getName()).append(";");
+        s.append(getGender()).append(";");
+        for(int i = 0; i < getAccountList().size(); i = i+1)
+            s.append(getAccountList().get(i)).append(";");
+
+        for(int i = 0; i < getCardList().size(); i = i+1)
+            s.append(getCardList().get(i)).append(";");
+        return s.toString();
+    }
+
+    @Override
+    public String toString(){
+        return "Client{" + "age=" + getAge() + ",name=" + getName() + ",gender=" + getGender() + ",accountList=" + accountList.toString() + ",cardList=" + cardList.toString() + "}";
+    }
 }

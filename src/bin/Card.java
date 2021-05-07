@@ -128,4 +128,20 @@ public class Card{
 
     }
 
+    public String convert2CSV(){
+        StringBuilder s =  new StringBuilder("Card: ");
+        s.append(cardNumber).append(";");
+        s.append(expirationDate).append(";");
+        s.append(CVV).append(";");
+        for(int i = 0; i < accounts.size(); i=i+1){
+            s.append(accounts.get(i).convert2CSV()).append(";");
+        }
+        return s.toString();
+    }
+
+    @Override
+    public String toString(){
+        return "Card{" + "cardNumber=" + cardNumber + ",expirationDate=" + expirationDate + ",CVV=" + CVV + ",accounts=" + accounts.toString() + "}";
+    }
+
 }

@@ -104,4 +104,18 @@ public class Bank extends CIFGEN{
         System.out.println();
     }
 
+    public String convert2CSV(){
+        StringBuilder s = new StringBuilder("Bank: ");
+        s.append(name).append(";");
+        s.append(adress).append(";");
+        s.append(CIF).append(";");
+        for(int i = 0; i < clientList.size(); i=i+1)
+            s.append(clientList.get(i).convert2CSV()).append(";");
+        return s.toString();
+    }
+
+    @Override
+    public String toString(){
+        return "Bank{" + "name=" + name + ",adress=" + adress + ",CIF=" + CIF + ",clientList=" + clientList.toString() + "}";
+    }
 }

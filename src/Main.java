@@ -1,6 +1,5 @@
 import bin.*;
 
-import java.util.List;
 import java.util.Scanner;
 
 
@@ -30,85 +29,86 @@ public class Main {
 
         int sel = -1;
         Scanner scanner = new Scanner(System.in);
+        SVC service = new SVC();
         while(sel != 0){
             Menu();
             sel = scanner.nextInt();
             switch (sel){
                 case 1:
-                    SVC.addBank();
+                    service.addBank();
                     break;
                 case 2:{
-                    SVC.listBanks();
+                    service.listBanks();
                     break;
                 }
 
                 case 3:{
-                    SVC.addClient();
+                    service.addClient();
                     break;
                 }
 
                 case 4:{
-                    SVC.listClients();
+                    service.listClients();
                     break;
                 }
 
                 case 5:{
-                    SVC.addPocket();
+                    service.addPocket();
                     break;
                 }
 
                 case 6:{
-                    SVC.listPockets();
+                    service.listPockets();
                     break;
                 }
 
                 case 7:{
-                    SVC.addAccount();
+                    service.addAccount();
                     break;
                 }
 
                 case 8:{
-                    SVC.listAccounts();
+                    service.listAccounts();
                     break;
                 }
 
                 case 9:{
-                    SVC.addCard();
+                    service.addCard();
                     break;
                 }
 
                 case 10:{
-                    SVC.listCards();
+                    service.listCards();
                     break;
                 }
 
                 case 11:{
-                    SVC.addVisa();
+                    service.addVisa();
                     break;
                 }
 
                 case 12:{
-                    SVC.listVisas();
+                    service.listVisas();
                     break;
                 }
 
                 case 13:{
-                    SVC.addMasterCard();
+                    service.addMasterCard();
                     break;
                 }
 
                 case 14:{
-                    SVC.listMasterCards();
+                    service.listMasterCards();
                     break;
                 }
 
                 case 15:{
-                    SVC.addMajor();
+                    service.addMajor();
                     break;
                 }
 
                 case 16:{
-                    SVC.listMajors();
+                    service.listMajors();
                     break;
                 }
 

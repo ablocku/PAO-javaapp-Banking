@@ -60,7 +60,7 @@ public class Account {
             System.out.println("IBAN length should be 22 characters");
             return false;
         }
-        return _IBAN != "XX00XXXX00000000000000";
+        return !_IBAN.equals("XX00XXXX00000000000000");
     }
 
 
@@ -99,7 +99,7 @@ public class Account {
     }
 
     public boolean isValid(){
-        if(this.IBAN == "XX00XXXX00000000000000" || this.IBAN.length() != 22)
+        if(this.IBAN.equals("XX00XXXX00000000000000") || this.IBAN.length() != 22)
             return false;
         if(this.currency.equals("RON") || this.currency.equals("EUR") ||  this.currency.equals("USD") ||  this.currency.equals("GBP"))
             ;
@@ -142,5 +142,19 @@ public class Account {
         }
         else
             System.out.println("Insufficient funds!");
+    }
+    
+    public String convert2CSV(){
+        StringBuilder s =  new StringBuilder("Account: ");
+        s.append(IBAN).append(";");
+        s.append(currency).append(";");
+        s.append(balance).append(";");
+        s.append(createDate).append(";");
+        return s.toString();
+    }
+
+    @Override
+    public String toString(){
+        return "Account{" + "IBAN=" + IBAN + ",currency=" + currency + ",balance=" + balance + ",created=" + createDate+"}";
     }
 }
