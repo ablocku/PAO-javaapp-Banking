@@ -1,6 +1,7 @@
 package bin;
 
 
+import java.util.ArrayList;
 
 public class Client extends Major {
 
@@ -8,10 +9,10 @@ public class Client extends Major {
 
     public Client(int age, String firstName, String lastName, char gender,Account account, Card card){
         super(age,firstName,lastName,gender);
-        if(account.isValid())
+        if(account.isValid() && accountList.size() + 1 < 10)
             if(!accountList.contains(account))
                 this.accountList.add(account);
-        if(card.isValid())
+        if(card.isValid() && cardList.size() + 1 < 10)
             if(!cardList.contains(card))
                 this.cardList.add(card);
     }
@@ -28,6 +29,14 @@ public class Client extends Major {
         if(account.isValid())
             if(!accountList.contains(account))
                 this.accountList.add(account);
+    }
+
+    public void setaccList(ArrayList<Account> l){
+        this.accountList = l;
+    }
+
+    public void setcardList(ArrayList<Card> l ){
+        this.cardList = l;
     }
 
     public void addCard(Card card){
@@ -62,9 +71,10 @@ public class Client extends Major {
         s.append(getAge()).append(";");
         s.append(getName()).append(";");
         s.append(getGender()).append(";");
+        s.append(getAccountList().size()).append(";");
         for(int i = 0; i < getAccountList().size(); i = i+1)
             s.append(getAccountList().get(i)).append(";");
-
+        s.append(getCardList().size()).append(";");
         for(int i = 0; i < getCardList().size(); i = i+1)
             s.append(getCardList().get(i)).append(";");
         return s.toString();
@@ -72,6 +82,6 @@ public class Client extends Major {
 
     @Override
     public String toString(){
-        return "Client{" + "age=" + getAge() + ",name=" + getName() + ",gender=" + getGender() + ",accountList=" + accountList.toString() + ",cardList=" + cardList.toString() + "}";
+        return "Client{" + "age=" + getAge() + ",name=" + getName() + ",gender=" + getGender() + ",nrOfAccounts=" + getAccountList().size() + ",accountList=" + accountList.toString() + ",nrOfCards="  + getCardList().size() + ",cardList=" + cardList.toString() + "}";
     }
 }

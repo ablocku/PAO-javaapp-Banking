@@ -133,6 +133,7 @@ public class Card{
         s.append(cardNumber).append(";");
         s.append(expirationDate).append(";");
         s.append(CVV).append(";");
+        s.append(accounts.size()).append(";");
         for(int i = 0; i < accounts.size(); i=i+1){
             s.append(accounts.get(i).convert2CSV()).append(";");
         }
@@ -141,7 +142,7 @@ public class Card{
 
     @Override
     public String toString(){
-        return "Card{" + "cardNumber=" + cardNumber + ",expirationDate=" + expirationDate + ",CVV=" + CVV + ",accounts=" + accounts.toString() + "}";
+        return "Card{" + "cardNumber=" + cardNumber + ",expirationDate=" + expirationDate + ",nrOfAccounts=" + accounts.size() +",CVV=" + CVV + ",accounts=" + accounts.toString() + "}";
     }
 
 }

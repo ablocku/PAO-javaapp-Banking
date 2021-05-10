@@ -17,7 +17,7 @@ public class Account {
     private String IBAN; // IBAN-ul contului
     private String currency; // Valuta contului
     private double balance; // Suma curenta din cont
-    private final Date createDate; // Data ultimei modificari aduse contului
+    private Date createDate; // Data ultimei modificari aduse contului
 
 
     public Account(String _IBAN, String _currency){
@@ -87,6 +87,9 @@ public class Account {
         this.balance = 0;
     }
 
+    public void editDate(Date date){
+        this.createDate = date;
+    }
 
     public double getBalance(){
         return this.balance;
